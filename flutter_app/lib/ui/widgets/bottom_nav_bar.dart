@@ -6,8 +6,6 @@ import 'package:ionicons/ionicons.dart';
 import '../../cubit/bottom_nav_cubit.dart';
 
 class BottomNavBar extends StatelessWidget {
-  /// It is okay not to use a const constructor here.
-  /// Using const breaks updating of selected BottomNavigationBarItem.
   const BottomNavBar({super.key});
 
   @override
@@ -34,14 +32,14 @@ class BottomNavBar extends StatelessWidget {
           backgroundColor: Colors.transparent,
           selectedItemColor: Theme.of(context).colorScheme.primary,
           unselectedItemColor: Theme.of(context).textTheme.bodySmall!.color,
-          items: <BottomNavigationBarItem>[
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: const Icon(Ionicons.home_outline),
-              label: tr('bottom_nav_first'),
+              icon: Icon(Ionicons.home_outline),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Ionicons.information_circle_outline),
-              label: tr('bottom_nav_second'),
+              icon: Icon(Ionicons.information_circle_outline),
+              label: 'Device details',
             ),
           ],
         );

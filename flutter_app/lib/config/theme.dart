@@ -131,6 +131,7 @@ final ThemeData lightTheme = ThemeData(
 final ThemeData darkTheme = lightTheme.copyWith(
   colorScheme: darkColorScheme,
   toggleableActiveColor: primarySwatch.shade500,
+  backgroundColor: darkColorScheme.background,
   textTheme: TextTheme(
     displayLarge: TextStyle(
       color: textSwatch.shade200,
