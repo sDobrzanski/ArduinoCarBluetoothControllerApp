@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'config/theme.dart';
 import 'cubit/theme_cubit.dart';
-import 'ui/screens/skeleton_screen.dart';
+import 'ui/screens/main_screen.dart';
 
 /// Try using const constructors as much as possible!
 
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
-            home: const SkeletonScreen(),
+            home: const MainScreen(),
           );
         },
       ),

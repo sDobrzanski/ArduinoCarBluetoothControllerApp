@@ -6,14 +6,14 @@ import 'package:ionicons/ionicons.dart';
 import '../../blocs/bluetooth_scan_cubit/bluetooth_scan_cubit.dart';
 import '../widgets/first_screen/info_card.dart';
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+class DevicesScreen extends StatefulWidget {
+  const DevicesScreen({super.key});
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<DevicesScreen> createState() => _DevicesScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _DevicesScreenState extends State<DevicesScreen> {
   late BluetoothScanCubit bluetoothScanCubit;
   final List<BluetoothDiscoveryResult> discoveries =
       <BluetoothDiscoveryResult>[];

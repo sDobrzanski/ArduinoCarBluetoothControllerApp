@@ -4,17 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/bottom_nav_cubit.dart';
 import '../widgets/app_bar_gone.dart';
 import '../widgets/bottom_nav_bar.dart';
-import 'first_screen.dart';
-import 'second_screen.dart';
+import 'devices_screen.dart';
+import 'device_details_screen.dart';
 
-class SkeletonScreen extends StatelessWidget {
-  const SkeletonScreen({super.key});
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     const List<Widget> pageNavigation = <Widget>[
-      FirstScreen(),
-      SecondScreen(),
+      DevicesScreen(),
+      DeviceDetailsScreen(),
     ];
 
     return BlocProvider<BottomNavCubit>(

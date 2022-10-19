@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_production_boilerplate/repositories/bluetooth_repository.dart';
 
 part 'bluetooth_device_state.dart';
@@ -12,34 +13,45 @@ class BluetoothDeviceCubit extends Cubit<BluetoothDeviceState> {
 
   final BluetoothRepository _bluetoothRepository;
 
-  Future<void> connectToDevice() async {
+  BluetoothConnection? get connectionToDevice =>
+      state is BluetoothDeviceWithConnection
+          ? (state as BluetoothDeviceWithConnection).connection
+          : null;
+
+  Future<void> connectToDevice(BluetoothDevice device) async {
     try {
       emit(BluetoothDeviceLoading());
-      //await _bluetoothRepository.connectToDevice(device);
-      //emit(BluetoothDeviceConnected(device));
+      final BluetoothConnection connection =
+          await _bluetoothRepository.getConnection(device);
+      emit(BluetoothDeviceConnected(connection));
     } catch (e) {
       emit(BluetoothDeviceError(e.toString()));
       print('Error $_prefix connectToDevice: ${e.toString()}');
     }
   }
 
-  Future<void> getCharacteristics() async {
+  void sendData(String data) {
     try {
-      emit(BluetoothDeviceLoading());
-      // final List<BluetoothCharacteristic> characteristics =
-      //     await _bluetoothRepository.getCharacteristics(device);
-      // emit(BluetoothDeviceCharacteristics(device, characteristics.first));
+      if (connectionToDevice != null) {
+        _bluetoothRepository.sendData(connectionToDevice!, data);
+        emit(BluetoothDeviceDataSent(connectionToDevice!, data));
+      } else {
+        throw Exception('No connection');
+      }
     } catch (e) {
       emit(BluetoothDeviceError(e.toString()));
-      print('Error $_prefix getCharacteristics: ${e.toString()}');
+      print('Error $_prefix sendData: ${e.toString()}');
     }
   }
 
-  Future<void> disconnectFromDevice() async {
+  void disconnectFromDevice() {
     try {
-      emit(BluetoothDeviceLoading());
-      // await _bluetoothRepository.disconnectFromDevice(device);
-      emit(BluetoothDeviceDisconnected());
+      if (connectionToDevice != null) {
+        _bluetoothRepository.closeConnection(connectionToDevice!);
+        emit(BluetoothDeviceDisconnected());
+      } else {
+        throw Exception('No connection');
+      }
     } catch (e) {
       emit(BluetoothDeviceError(e.toString()));
       print('Error $_prefix disconnectFromDevice: ${e.toString()}');

@@ -6,8 +6,8 @@ import '../widgets/second_screen/grid_item.dart';
 import '../widgets/second_screen/link_card.dart';
 import '../widgets/second_screen/text_divider.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
+class DeviceDetailsScreen extends StatelessWidget {
+  const DeviceDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
