@@ -18,8 +18,22 @@ class BluetoothScanCubit extends Cubit<BluetoothScanState> {
 
   final BluetoothRepository _bluetoothRepository;
 
-  Stream<BluetoothDiscoveryResult> discoveryStream() =>
-      _bluetoothRepository.discoveryStream();
+  void discoverDevices() {
+    try {
+      emit(BluetoothScanLoading());
+      final List<BluetoothDiscoveryResult> discoveries =
+          <BluetoothDiscoveryResult>[];
+      _bluetoothRepository
+          .discoveryStream()
+          .listen((BluetoothDiscoveryResult result) {
+        discoveries.add(result);
+        emit(BluetoothScanSuccess(discoveries, DateTime.now().toString()));
+      });
+    } catch (e) {
+      emit(BluetoothScanError(e.toString()));
+      print('Error $_prefix discoveryDevices: ${e.toString()}');
+    }
+  }
 
   Future<void> cancelDiscovery() async {
     try {

@@ -23,6 +23,10 @@ class BluetoothDeviceCubit extends Cubit<BluetoothDeviceState> {
           ? (state as BluetoothDeviceWithConnection)
           : null;
 
+  bool isConnected(String deviceAddress) =>
+      state is BluetoothDeviceConnected &&
+      (state as BluetoothDeviceConnected).isDeviceConnected(deviceAddress);
+
   Future<void> changeConnectionStatus(BluetoothDevice device) async {
     try {
       if (stateWithData == null) {

@@ -20,9 +20,16 @@ class InfoCard extends StatefulWidget {
 }
 
 class _InfoCardState extends State<InfoCard> {
-  bool isPrimaryColor = false;
+  late bool isConnected;
 
-  TextTheme get textTheme => isPrimaryColor
+  @override
+  void initState() {
+    super.initState();
+    isConnected = BlocProvider.of<BluetoothDeviceCubit>(context)
+        .isConnected(widget.deviceAddress);
+  }
+
+  TextTheme get textTheme => isConnected
       ? Theme.of(context).primaryTextTheme
       : Theme.of(context).textTheme;
 
@@ -32,11 +39,11 @@ class _InfoCardState extends State<InfoCard> {
       listener: (BuildContext context, BluetoothDeviceState state) {
         if (state is BluetoothDeviceConnected) {
           setState(() {
-            isPrimaryColor = state.isDeviceConnected(widget.deviceAddress);
+            isConnected = state.isDeviceConnected(widget.deviceAddress);
           });
         } else if (state is BluetoothDeviceDisconnected) {
           setState(() {
-            isPrimaryColor = false;
+            isConnected = false;
           });
         }
       },
@@ -45,7 +52,7 @@ class _InfoCardState extends State<InfoCard> {
         child: Card(
           elevation: 2,
           shadowColor: Theme.of(context).colorScheme.shadow,
-          color: isPrimaryColor
+          color: isConnected
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.surface,
           shape: const RoundedRectangleBorder(

@@ -16,9 +16,7 @@ class DevicesScreen extends StatefulWidget {
 }
 
 class _DevicesScreenState extends State<DevicesScreen> {
-  late BluetoothScanCubit bluetoothScanCubit;
-  final List<BluetoothDiscoveryResult> discoveries =
-      <BluetoothDiscoveryResult>[];
+  late final BluetoothScanCubit bluetoothScanCubit;
 
   @override
   void didChangeDependencies() {
@@ -38,19 +36,14 @@ class _DevicesScreenState extends State<DevicesScreen> {
           }
         },
         child: SingleChildScrollView(
-          child: StreamBuilder<BluetoothDiscoveryResult>(
-              stream: BlocProvider.of<BluetoothScanCubit>(context)
-                  .discoveryStream(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<BluetoothDiscoveryResult> snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return const Text('Error with scanning for devices');
-                } else if (snapshot.hasData) {
-                  discoveries.add(snapshot.data!);
-                  discoveries.toSet().toList();
-                }
+          child: BlocBuilder<BluetoothScanCubit, BluetoothScanState>(
+            builder: (BuildContext context, BluetoothScanState state) {
+              if (state is BluetoothScanLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is BluetoothScanError) {
+                return const Text(
+                    'Problem with scanning for devices \n please try again');
+              } else if (state is BluetoothScanSuccess) {
                 return GridView.count(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -59,8 +52,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   mainAxisSpacing: 8,
                   padding: EdgeInsets.zero,
                   children: [
-                    for (BluetoothDiscoveryResult result
-                        in discoveries.toSet().toList())
+                    for (BluetoothDiscoveryResult result in state.discoveries)
                       InfoCard(
                         deviceName: result.device.name ?? '',
                         deviceAddress: result.device.address,
@@ -70,7 +62,11 @@ class _DevicesScreenState extends State<DevicesScreen> {
                       ),
                   ],
                 );
-              }),
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
         ),
       ),
     );
