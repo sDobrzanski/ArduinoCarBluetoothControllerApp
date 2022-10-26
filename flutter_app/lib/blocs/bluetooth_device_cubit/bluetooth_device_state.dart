@@ -43,7 +43,7 @@ class BluetoothDeviceDataSent extends BluetoothDeviceWithConnection {
   final String data;
 
   @override
-  List<Object?> get props => [super.connection, data];
+  List<Object?> get props => [device, connection, data];
 }
 
 class BluetoothDeviceDisconnected extends BluetoothDeviceState {

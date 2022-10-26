@@ -301,6 +301,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.3"
+  routemaster:
+    dependency: "direct main"
+    description:
+      name: routemaster
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   shared_preferences:
     dependency: transitive
     description:
@@ -396,7 +403,7 @@ packages:
       name: synchronized
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0+2"
+    version: "3.0.0+3"
   term_glyph:
     dependency: transitive
     description:

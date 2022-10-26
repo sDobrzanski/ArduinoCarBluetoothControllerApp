@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:ionicons/ionicons.dart';
+
 
 import '../../blocs/bluetooth_device_cubit/bluetooth_device_cubit.dart';
 import '../../blocs/bluetooth_scan_cubit/bluetooth_scan_cubit.dart';
 import '../../utils/dialog_snackbars.dart';
-import '../widgets/first_screen/info_card.dart';
+import '../widgets/main_screen/info_card.dart';
 
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({super.key});

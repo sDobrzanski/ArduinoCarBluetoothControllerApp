@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -35,11 +34,11 @@ class BottomNavBar extends StatelessWidget {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Ionicons.home_outline),
-              label: 'Home',
+              label: 'Devices',
             ),
             BottomNavigationBarItem(
               icon: Icon(Ionicons.information_circle_outline),
-              label: 'Device details',
+              label: 'Connected device',
             ),
           ],
         );
