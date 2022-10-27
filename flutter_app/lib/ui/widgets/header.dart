@@ -1,17 +1,22 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key, required this.text});
+  const Header({
+    super.key,
+    required this.text,
+    this.padding,
+  });
 
   final String text;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 2, right: 2, top: 48, bottom: 24),
+      padding: padding ??
+          const EdgeInsets.only(left: 2, right: 2, top: 48, bottom: 24),
       child: Text(
-        tr(text),
+        text,
         textAlign: TextAlign.start,
         style: Theme.of(context)
             .textTheme

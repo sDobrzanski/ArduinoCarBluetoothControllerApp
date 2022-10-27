@@ -28,19 +28,20 @@ class DeviceDetailsScreen extends StatelessWidget {
                   address: state.device.address,
                 ),
                 TextButton(
-                    onPressed: () =>
-                        Routemaster.of(context).push(ControlScreen.route),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5))),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'Use remote controller',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    )),
+                  onPressed: () =>
+                      Routemaster.of(context).push(ControlScreen.route),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5))),
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      'Use remote controller',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                ),
               ]),
             );
           } else {

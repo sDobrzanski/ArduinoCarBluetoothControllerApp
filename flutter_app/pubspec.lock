@@ -125,6 +125,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  flutter_joystick:
+    dependency: "direct main"
+    description:
+      name: flutter_joystick
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -482,7 +489,7 @@ packages:
     source: hosted
     version: "3.0.1"
   vector_math:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: vector_math
       url: "https://pub.dartlang.org"
